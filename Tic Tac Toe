@@ -1,0 +1,569 @@
+
+
+import javafx.scene.control.Button;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javax.swing.*;
+import java.awt.*;
+
+
+public class TicTacToe_BtnText extends Application {
+    boolean m=true;
+    boolean btn1=true;
+    boolean btn2=true;
+    boolean btn3=true;
+    boolean btn4=true;
+    boolean btn5=true;
+    boolean btn6=true;
+    boolean btn7=true;
+    boolean btn8=true;
+    boolean btn9=true;
+    boolean con=true;
+    boolean XOrO=true;
+    int[] p1won={0,0,0,0,0,0,0,0,0};
+    int[] p2won={0,0,0,0,0,0,0,0,0};
+
+    private int p1won()
+    {
+        if(p1won[0]==1 && p1won[1]==1 &&p1won[2]==1)
+        {
+            return 1;
+        }
+        if(p1won[3]==1 && p1won[4]==1 &&p1won[5]==1)
+        {
+            return 1;
+        }
+        if(p1won[6]==1 && p1won[7]==1 &&p1won[8]==1)
+        {
+            return 1;
+        }
+        if(p1won[0]==1 && p1won[3]==1 &&p1won[6]==1)
+        {
+            return 1;
+        }
+        if(p1won[1]==1 && p1won[4]==1 &&p1won[7]==1)
+        {
+            return 1;
+        }
+        if(p1won[2]==1 && p1won[5]==1 && p1won[8]==1)
+        {
+            return 1;
+        }
+        if(p1won[2]==1 && p1won[4]==1 &&p1won[6]==1)
+        {
+            return 1;
+        }
+        if(p1won[0]==1 && p1won[4]==1 &&p1won[8]==1)
+        {
+            return 1;
+        }
+        return 0;
+    }
+    private int p2won()
+    {
+        if(p2won[0]==1 && p2won[1]==1 &&p2won[2]==1)
+        {
+            return 1;
+        }
+        if(p2won[3]==1 && p2won[4]==1 &&p2won[5]==1)
+        {
+            return 1;
+        }
+        if(p2won[6]==1 && p2won[7]==1 &&p2won[8]==1)
+        {
+            return 1;
+        }
+        if(p2won[0]==1 && p2won[3]==1 &&p2won[6]==1)
+        {
+            return 1;
+        }
+        if(p2won[1]==1 && p2won[4]==1 &&p2won[7]==1)
+        {
+            return 1;
+        }
+        if(p2won[2]==1 && p2won[5]==1 && p2won[8]==1)
+        {
+            return 1;
+        }
+        if(p2won[2]==1 && p2won[4]==1 &&p2won[6]==1)
+        {
+            return 1;
+        }
+        if(p2won[0]==1 && p2won[4]==1 &&p2won[8]==1)
+        {
+            return 1;
+        }
+        return 0;
+    }
+    private int draw()
+    {
+        if(!btn1 && !btn2 && !btn3 && !btn4 && !btn5 && !btn6 && !btn7 && !btn8 && !btn9)
+        {
+            return 1;
+        }
+        return 0;
+    }
+    @Override
+    public void start(Stage stage) {
+        Component rootPane = null;
+        Line[] line = new Line[6];
+        Pane pane = new Pane();
+
+        Button[][] button = new Button[3][3];
+        for (int n = 0; n < 3; n++) {
+            for (int j = 0; j < 3; j++) {
+                button[n][j] = new Button();
+                button[n][j].setLayoutX(j * 200);
+                button[n][j].setLayoutY(n * 200);
+                button[n][j].setMinSize(200, 200);
+                pane.getChildren().add(button[n][j]);
+            }
+        }
+        button[0][0].setOnMouseClicked((mouseEvent -> {
+            if (btn1 && con) {
+                if (m) {
+                    button[0][0].setText("X");
+                    m = false;
+                    p1won[0] = 1;
+                } else {
+                    button[0][0].setText("O");
+                    m = true;
+                    p2won[0] = 1;
+                }
+                button[0][0].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[0][0].setTextFill(Color.BLACK);
+                btn1 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+
+        button[0][1].setOnMouseClicked((mouseEvent -> {
+            if (btn2 && con) {
+                if (m) {
+                    button[0][1].setText("X");
+                    m = false;
+                    p1won[1] = 1;
+                } else {
+                    button[0][1].setText("O");
+                    m = true;
+                    p2won[1] = 1;
+                }
+                button[0][1].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[0][1].setTextFill(Color.BLACK);
+                btn2=false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+        button[0][2].setOnMouseClicked((mouseEvent -> {
+            if (btn3 && con) {
+                if (m) {
+                    button[0][2].setText("X");
+                    m = false;
+                    p1won[2] = 1;
+                } else {
+                    button[0][2].setText("O");
+                    m = true;
+                    p2won[2] = 1;
+                }
+                button[0][2].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[0][2].setTextFill(Color.BLACK);
+                btn3 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+        button[1][0].setOnMouseClicked((mouseEvent -> {
+            if (btn4 && con) {
+                if (m) {
+                    button[1][0].setText("X");
+                    m = false;
+                    p1won[3] = 1;
+                } else {
+                    button[1][0].setText("O");
+                    m = true;
+                    p2won[3] = 1;
+                }
+                button[1][0].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[1][0].setTextFill(Color.BLACK);
+                btn4 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+        button[1][1].setOnMouseClicked((mouseEvent -> {
+            if (btn5 && con) {
+                if (m) {
+                    button[1][1].setText("X");
+                    m = false;
+                    p1won[4] = 1;
+                } else {
+                    button[1][1].setText("O");
+                    m = true;
+                    p2won[4] = 1;
+                }
+                button[1][1].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[1][1].setTextFill(Color.BLACK);
+                btn5 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+        button[1][2].setOnMouseClicked((mouseEvent -> {
+            if (btn6 && con) {
+                if (m) {
+                    button[1][2].setText("X");
+                    m = false;
+                    p1won[5] = 1;
+                } else {
+                    button[1][2].setText("O");
+                    m = true;
+                    p2won[5] = 1;
+                }
+                button[1][2].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[1][2].setTextFill(Color.BLACK);
+                btn6 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+        button[2][0].setOnMouseClicked((mouseEvent -> {
+            if (btn7 && con) {
+                if (m) {
+                    button[2][0].setText("X");
+                    m = false;
+                    p1won[6] = 1;
+                } else {
+                    button[2][0].setText("O");
+                    m = true;
+                    p2won[6] = 1;
+                }
+                button[2][0].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[2][0].setTextFill(Color.BLACK);
+                btn7 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+        button[2][1].setOnMouseClicked((mouseEvent -> {
+            if (btn8 && con) {
+                if (m) {
+                    button[2][1].setText("X");
+                    m = false;
+                    p1won[7] = 1;
+                } else {
+                    button[2][1].setText("O");
+                    m = true;
+                    p2won[7] = 1;
+                }
+                button[2][1].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[2][1].setTextFill(Color.BLACK);
+                btn8 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+        button[2][2].setOnMouseClicked((mouseEvent -> {
+            if (btn9 && con) {
+                if (m) {
+                    button[2][2].setText("X");
+                    m = false;
+                    p1won[8] = 1;
+                } else {
+                    button[2][2].setText("O");
+                    m = true;
+                    p2won[8] = 1;
+                }
+                button[2][2].setFont(Font.font(null, FontWeight.BOLD, 70.0));
+                button[2][2].setTextFill(Color.BLACK);
+                btn9 = false;
+
+                int result1 = p1won();
+                int result2 = p2won();
+                int draw = draw();
+
+                if (result1 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player X Had Won The Match");
+                    con = false;
+                } else if (result2 == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "Player O Had Won The Match");
+                    con = false;
+                } else if (draw == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "The Match Is Declared As Draw");
+                    con = false;
+                }
+            } else if (!con) {
+                JOptionPane.showMessageDialog(rootPane, "This Game Is Already Finished");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "This Button Is Already Used");
+            }
+        }));
+
+        for (int i = 0; i < 6; i++) {
+            if (i <= 2) {
+                line[i] = new Line(0,(i+1)*200,600,(i+1)*200);
+            } else {
+                line[i] = new Line((i-2)*200,0,(i-2)*200,700);
+            }
+            pane.getChildren().add(line[i]);
+        }
+        Button play = new Button("Play Again");
+        play.setLayoutX(210);
+        play.setLayoutY(610);
+        play.setMinSize(180,80);
+        play.setFont(Font.font(null, FontWeight.BOLD, 20.0));
+        play.setTextFill(Color.BLACK);
+        DropShadow drop=new DropShadow(20,Color.BLACK);
+        play.setEffect(drop);
+        pane.getChildren().add(play);
+
+        play.setOnMouseClicked(mouseEvent ->{
+
+            m=XOrO;
+            btn1=true;
+            btn2=true;
+            btn3=true;
+            btn4=true;
+            btn5=true;
+            btn6=true;
+            btn7=true;
+            btn8=true;
+            btn9=true;
+            con=true;
+            for(int v=0;v<9;v++)
+            {
+                p1won[v]=0;
+                p2won[v]=0;
+            }
+            for(int w=0;w<3;w++)
+            {
+                for(int x=0;x<3;x++)
+                {
+                    button[w][x].setText(" ");
+                }
+            }
+        });
+        Button playX = new Button("Play As X");
+        playX.setLayoutX(10);
+        playX.setLayoutY(610);
+        playX.setMinSize(180,80);
+        playX.setFont(Font.font(null, FontWeight.BOLD, 20.0));
+        playX.setTextFill(Color.BLACK);
+        playX.setEffect(drop);
+        pane.getChildren().add(playX);
+
+        playX.setOnMouseClicked(mouseEvent ->{
+            m = true;
+            XOrO=true;
+            btn1=true;
+            btn2=true;
+            btn3=true;
+            btn4=true;
+            btn5=true;
+            btn6=true;
+            btn7=true;
+            btn8=true;
+            btn9=true;
+            con=true;
+            for(int v=0;v<9;v++)
+            {
+                p1won[v]=0;
+                p2won[v]=0;
+            }
+            for(int w=0;w<3;w++)
+            {
+                for(int x=0;x<3;x++)
+                {
+                    button[w][x].setText(" ");
+                }
+            }
+        });
+        Button playO = new Button("Play As O");
+        playO.setLayoutX(410);
+        playO.setLayoutY(610);
+        playO.setMinSize(180,80);
+        playO.setFont(Font.font(null, FontWeight.BOLD, 20.0));
+        playO.setTextFill(Color.BLACK);
+        playO.setEffect(drop);
+        pane.getChildren().add(playO);
+
+        playO.setOnMouseClicked(mouseEvent ->{
+            m = false;
+            XOrO=false;
+            btn1=true;
+            btn2=true;
+            btn3=true;
+            btn4=true;
+            btn5=true;
+            btn6=true;
+            btn7=true;
+            btn8=true;
+            btn9=true;
+            con=true;
+            for(int v=0;v<9;v++)
+            {
+                p1won[v]=0;
+                p2won[v]=0;
+            }
+            for(int w=0;w<3;w++)
+            {
+                for(int x=0;x<3;x++)
+                {
+                    button[w][x].setText(" ");
+                }
+            }
+        });
+        Scene scene = new Scene(pane, 600, 700);
+        stage.setTitle("TicTacToe Application Created By Umair");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
